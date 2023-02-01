@@ -1,0 +1,56 @@
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet"
+  id="bootstrap-css" />
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css">
+<div class="overlay">
+  <div class="loginform">
+    <div class="d-flex justify-content-center h-100">
+      <div class="card">
+        <div class="card-header">
+          <h1>Betting Project®</h1>
+          <h3>Welcome, Sign In!</h3>
+          <div class="d-flex justify-content-end social_icon">
+            <a href="https://github.com/GioOzz" target="_blank" rel="noopener" title="GitHub"><span><i
+                  class="fab fa-github-square"></i></span></a>
+            <a href="https://www.linkedin.com/in/ozzolagiorgio/" rel="noopener" target=_blank title="LinkedIn"><span><i
+                  class="fab fa-linkedin"></i></span></a>
+          </div>
+        </div>
+        <div class="card-body">
+          <form name="form" *ngIf="!isSuccessful" #f="ngForm" (ngSubmit)="f.form.valid && submit()" novalidate>
+            <div class="input-group form-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"> <i class="fas fa-user"></i></span>
+              </div>
+              <input type="text" required class="form-control" placeholder="Username" [(ngModel)]="form.username"
+                #username="ngModel" name="username" minlength="4" maxlength="20" />
+            </div>
+            <div class="alert alert-danger" role="alert" *ngIf="username.errors?.['required'] && f.submitted">
+              Username is required!</div>
+            <div class="alert alert-danger" *ngIf="username.errors?.['minlength']">Username must be at least 4
+              characters</div>
+            <div class="input-group form-group">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fas fa-key"></i></span>
+              </div>
+              <input type="password" class="form-control" placeholder="Password" name="password"
+                [(ngModel)]="form.password" #password="ngModel" minlength="6" />
+            </div>
+            <div class="alert alert-danger" role="alert" *ngIf="password.errors && f.submitted">
+              <div *ngIf="password.errors?.['required']">Password is required</div>
+              <div *ngIf="password.errors?.['minlength']">Password must be at least 6 characters
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="alert alert-danger" role="alert" *ngIf="f.submitted && isLoginFailed">Login failed, please try again</div>
+              <input id="submit" type="submit" value="Login" class="btn float-right login_btn" />
+            </div>
+          </form>
+          <div class="card-footer">
+            <p>Don't have any account? <br>
+              <a href="/register">Sign Up here!</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
