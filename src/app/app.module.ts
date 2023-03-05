@@ -9,6 +9,11 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { UserService } from './UserService';
+import { ThemeService } from './ThemeService';
+import { NavbarComponent } from './navbar/navbar.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ProfileComponent } from './profile/profile.component';
+import { LoadingComponent } from './loading/loading.component';
 
 @NgModule({
   declarations: [
@@ -16,6 +21,9 @@ import { UserService } from './UserService';
     HomeComponent,
     LoginComponent,
     RegisterComponent,
+    NavbarComponent,
+    ProfileComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -23,16 +31,19 @@ import { UserService } from './UserService';
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot([
-      { path: '', component: LoginComponent },
+      { path: '', component: HomeComponent },
+      { path: 'login', component: LoginComponent },
       { path: 'register', component: RegisterComponent },
-      { path: 'home', component: HomeComponent }
-    ])
+      { path: 'home', component: HomeComponent },
+      { path: 'profile', component: ProfileComponent}
+    ]),
+    BrowserAnimationsModule
   ],
   exports: [
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [UserService],
+  providers: [UserService, ThemeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

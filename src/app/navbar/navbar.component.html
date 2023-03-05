@@ -1,0 +1,37 @@
+<nav class="navbar navbar-expand-md" [ngClass]="getNavbarTheme()">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#" [ngClass]="getNavbarTextTheme('logo')">
+            <img [src]="getNavbarIcon()" width="50px" alt="Logo" class="d-inline-block align-text-center"> Football Bets
+        </a>
+    </div>
+    <div class="collapse navbar-collapse col">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="#" [ngClass]="getNavbarTextTheme('home')"
+                    (click)="selectedTab = 'home'">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" [ngClass]="getNavbarTextTheme('leagues')"
+                    (click)="selectedTab = 'leagues'">Leagues</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" [ngClass]="getNavbarTextTheme('settings')"
+                    (click)="selectedTab = 'settings'">Settings</a>
+            </li>
+            <li class="nav-item dropdown d-flex">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                    [ngClass]="getNavbarTextTheme('more')" aria-expanded="false">
+                    Account
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a class="dropdown-item" href="/profile">Profile</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="/profile">Settings</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</nav>

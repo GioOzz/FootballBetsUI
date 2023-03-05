@@ -1,0 +1,12 @@
+/* You can add global styles to this file, and also import other style files */
+$primary : green;
+$secondary : rgb(42, 83, 42);
+$accent : lime;
+$danger: red;
+
+@import "bootstrap"; 
+
+/* Provide sufficient contrast against white background */
+
+html, body {   width: 100% !important; height: 100% !important;}
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

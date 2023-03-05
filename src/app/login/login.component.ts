@@ -20,7 +20,6 @@ export class LoginComponent {
     const { username, password } = this.form;
     this.userService.login(username, password).subscribe({
       next: data => {
-        console.log(data);
         this.isLoginFailed = false;
         this.isSuccessful = true;
         location.replace("/home");

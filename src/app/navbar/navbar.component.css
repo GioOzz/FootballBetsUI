@@ -1,0 +1,46 @@
+.active{
+    background-color: #376cdf;
+    border-radius: 30px;
+}
+
+
+.navbar-nav .nav-item .nav-link:hover:not(.active) {
+    background-color: rgba(117, 106, 106, 0.694);
+    border-radius: 30px;
+    transition: background-color 0.3s ease;
+}
+
+.dropdown {
+    position: relative;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.theme-toggle-button {
+    border: none;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    font-weight: bold;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+}
+
+.theme-toggle-button:hover {
+    background-color: #0069d9;
+}
+
+.theme-toggle-button span {
+    margin-right: 0.5rem;
+}
