@@ -4,9 +4,36 @@ $secondary : rgb(42, 83, 42);
 $accent : lime;
 $danger: red;
 
-@import "bootstrap"; 
+@import "bootstrap";
 
 /* Provide sufficient contrast against white background */
 
-html, body {   width: 100% !important; height: 100% !important;}
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.dark-theme {
+    background-color: rgba(85, 104, 75, 0.753);
+    color: darkgreen;
+
+    mat-cell {
+        color: white
+    }
+}

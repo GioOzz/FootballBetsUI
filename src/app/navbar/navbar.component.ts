@@ -10,32 +10,39 @@ import { ThemeService } from '../ThemeService';
 })
 export class NavbarComponent implements OnInit {
   selectedTab = 'home';
-  theme : string = '';
-  isDarkTheme: boolean;
+  theme: string = '';
+  isDarkMode: boolean;
 
-  constructor(private themeService: ThemeService, navbarService : NavbarService) { 
-    this.isDarkTheme = this.themeService.isDarkTheme();
+  constructor(private themeService: ThemeService, navbarService: NavbarService) {
+    this.isDarkMode = this.themeService.darkModeEnabled;
     navbarService.activeItem$.subscribe((item) => {
       this.selectedTab = item;
     });
   }
-  
+
   ngOnInit() {
-    this.themeService.currentTheme.subscribe(theme => this.theme = theme);
+
+  }
+  toggleDarkMode(): void {
+    this.isDarkMode = !this.isDarkMode;
+    this.themeService.setDarkModeState(this.isDarkMode);
   }
 
+  isDarkTheme() {
+    return this.themeService.darkModeEnabled;
+  }
   getNavbarTheme(): string {
-    return this.themeService.isDarkTheme() ? 'bg-secondary' : 'bg-primary';
+    return this.themeService.darkModeEnabled ? 'bg-secondary' : 'bg-primary';
   }
   getNavbarTextTheme(tabName: string): string {
     if (this.selectedTab === tabName) {
       return 'active';
     }
     //isDarkTheme -> bg-secondary && text light
-    return this.themeService.isDarkTheme() ? 'text-light' : 'text-dark';
+    return this.themeService.darkModeEnabled ? 'text-light' : 'text-dark';
   }
   getNavbarIcon(): string {
-    return this.themeService.isDarkTheme() ? '../../assets/logo/logo_small_icon_only.png' :
+    return this.themeService.darkModeEnabled ? '../../assets/logo/logo_small_icon_only.png' :
       '../../assets/logo/logo_small_icon_only_inverted.png';
   }
   isActive(item: string) {

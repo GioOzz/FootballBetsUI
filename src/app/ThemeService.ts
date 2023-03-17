@@ -1,26 +1,38 @@
-import { Injectable, OnInit } from '@angular/core';
-import { MediaMatcher } from '@angular/cdk/layout';
+import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+
+export enum ThemeMode {
+  Light = 'light',
+  Dark = 'dark',
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class ThemeService {
-  private theme = new BehaviorSubject<string>('light'); // default theme is 'light'
-  private mediaMatcher: MediaQueryList;
+  private _darkModeState: BehaviorSubject<boolean>;
 
-  currentTheme = this.theme.asObservable();
+  constructor() {
+    const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+    this._darkModeState = new BehaviorSubject<boolean>(isDarkMode);
+  }
+
+  get darkModeEnabled(): boolean {
+    return this._darkModeState.value;
+  }
+
+  toggleDarkMode(): void {
+    const darkModeEnabled = !this.darkModeEnabled;
+    this.setDarkModeState(darkModeEnabled);
+  }
+
+  setDarkModeState(isEnabled: boolean): void {
+    document.body.classList.toggle('dark', isEnabled);
+    this._darkModeState.next(isEnabled);
+  }
   
-  constructor(private media: MediaMatcher) {
-    // Create a new media query list that will detect changes to the user's system theme preference
-    this.mediaMatcher = matchMedia('(prefers-color-scheme: dark)');
-  }
-
   isDarkTheme(): boolean {
-    return this.mediaMatcher.matches;
+    return this._darkModeState.value;
   }
 
-  setTheme(theme: string) {
-    this.theme.next(theme);
-  }
 }

@@ -1,0 +1,28 @@
+th {
+    background-color: #ccc;
+    text-align: center;
+}
+
+td {
+    vertical-align: middle;
+    text-align: center;
+}
+
+tbody tr:nth-child(even) {
+    background-color: primary;
+}
+
+
+img {
+    width: 40px;
+    height: 40px;
+    margin: 10px;
+}
+
+.match-description {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    text-align: center;
+}

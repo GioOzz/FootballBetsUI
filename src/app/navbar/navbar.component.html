@@ -32,6 +32,11 @@
                     </li>
                 </ul>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" [ngClass]="getNavbarTextTheme('dark-theme')" (click)="toggleDarkMode()" >
+                    <mat-icon>{{ isDarkMode ? 'light_mode' : 'dark_mode' }}</mat-icon>
+                </a>
+            </li>
         </ul>
     </div>
 </nav>

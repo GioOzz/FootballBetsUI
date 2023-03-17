@@ -44,3 +44,24 @@
 .theme-toggle-button span {
     margin-right: 0.5rem;
 }
+
+button.mat-icon-button {
+    background-color: transparent;
+    border-radius: 50%;
+    border: none;
+    padding: 8px;
+  }
+  
+  button.mat-icon-button:hover {
+    background-color: rgba(106, 121, 94, 0.863);
+  }
+  
+  button.mat-icon-button:focus {
+    outline: none;
+  }
+  
+  button.mat-icon-button .mat-icon {
+    font-size: 24px;
+    color: #fff;
+  }
+  
