@@ -13,22 +13,6 @@ export class FootballDataService {
 
   constructor(private http: HttpClient) { }
 
-  // getMatches(dateFrom: string, dateTo: string): Observable<any> {
-  //   const httpOptions = {
-  //     headers: new HttpHeaders({
-  //       'X-Auth-Token': this.apikey
-  //     })
-  //   };
-  //   const filters: Filters = {
-  //     dateFrom: dateFrom,
-  //     dateTo: dateTo,
-  //     permission : '',
-  //     competitions: this.competitions,
-  //   };
-  //   const params = Object.keys(filters).map(key => key + '=' + filters[key]).join('&');
-  //   return this.http.get<any>(`${this.endpoint + 'matches'}?${params}`, httpOptions);
-  // }
-
   getMatches(filters?: Filters): Observable<Map<string, Match[]>> {
     let url = `${this.endpoint}matches?`;
     let filtersString = '';
