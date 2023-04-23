@@ -7,7 +7,7 @@
     <div class="collapse navbar-collapse col">
         <ul class="navbar-nav">
             <li class="nav-item">
-                <a class="nav-link" href="#" [ngClass]="getNavbarTextTheme('home')"
+                <a class="nav-link" href="/home" [ngClass]="getNavbarTextTheme('home')"
                     (click)="selectedTab = 'home'">Home</a>
             </li>
             <li class="nav-item">
@@ -18,25 +18,16 @@
                 <a class="nav-link" href="#" [ngClass]="getNavbarTextTheme('settings')"
                     (click)="selectedTab = 'settings'">Settings</a>
             </li>
-            <li class="nav-item dropdown d-flex">
-                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                    [ngClass]="getNavbarTextTheme('more')" aria-expanded="false">
-                    Account
-                </a>
-                <ul class="dropdown-menu">
-                    <li>
-                        <a class="dropdown-item" href="/profile">Profile</a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" href="/profile">Settings</a>
-                    </li>
-                </ul>
+            <li class="nav-item">
+                <a class="nav-link" href="/profile" [ngClass]="getNavbarTextTheme('profile')"
+                    (click)="selectedTab = 'profile'">Profile</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#" [ngClass]="getNavbarTextTheme('dark-theme')" (click)="toggleDarkMode()" >
+                <a class="nav-link" [ngClass]="getNavbarTextTheme('dark-theme')" (click)="toggleDarkMode()">
                     <mat-icon>{{ isDarkMode ? 'light_mode' : 'dark_mode' }}</mat-icon>
                 </a>
             </li>
         </ul>
     </div>
 </nav>
+<br/>

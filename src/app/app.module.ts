@@ -9,6 +9,8 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatListModule } from '@angular/material/list';
+
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -21,6 +23,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ProfileComponent } from './profile/profile.component';
 import { LoadingComponent } from './loading/loading.component';
 import { MatchesComponent } from './matches/matches.component';
+import { BetslipComponent } from './betslip/betslip.component';
 
 
 @NgModule({
@@ -32,7 +35,8 @@ import { MatchesComponent } from './matches/matches.component';
     NavbarComponent,
     ProfileComponent,
     LoadingComponent,
-    MatchesComponent
+    MatchesComponent,
+    BetslipComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -40,8 +44,8 @@ import { MatchesComponent } from './matches/matches.component';
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent },
-      { path: 'login', component: LoginComponent },
+      { path: '', component: LoginComponent },
+      { path: 'home', component: HomeComponent },
       { path: 'register', component: RegisterComponent },
       { path: 'home', component: HomeComponent },
       { path: 'profile', component: ProfileComponent }
@@ -53,7 +57,8 @@ import { MatchesComponent } from './matches/matches.component';
     MatIconModule,
     MatInputModule,
     MatFormFieldModule,
-    MatTableModule
+    MatTableModule,
+    MatListModule
   ],
   exports: [
     FormsModule,
@@ -62,7 +67,8 @@ import { MatchesComponent } from './matches/matches.component';
     MatPaginatorModule,
     MatSortModule,
     MatIconModule,
-    MatchesComponent
+    MatchesComponent,
+    BetslipComponent
   ],
   providers: [UserService, ThemeService],
   bootstrap: [AppComponent]

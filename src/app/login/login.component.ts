@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { UserService } from '../UserService';
+import { NavbarService } from '../NavbarService';
+import { ThemeService } from '../ThemeService';
 
 @Component({
   selector: 'login',
@@ -22,13 +24,14 @@ export class LoginComponent {
       next: data => {
         this.isLoginFailed = false;
         this.isSuccessful = true;
-        location.replace("/home");
+        localStorage.setItem("userdata", JSON.stringify(data));
+        location.replace("/profile");
       },
       error: err => {
         this.isLoginFailed = true;
         if (err.status == 409)
           this.errorMessage = err.message;
-        if (err.status == 404 || err.status == 500 )
+        if (err.status == 404 || err.status == 500)
           this.errorMessage += "Couldn't complete the process, an error occurred!";
       }
     });

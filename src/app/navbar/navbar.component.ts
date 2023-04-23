@@ -35,10 +35,8 @@ export class NavbarComponent implements OnInit {
     return this.themeService.darkModeEnabled ? 'bg-secondary' : 'bg-primary';
   }
   getNavbarTextTheme(tabName: string): string {
-    if (this.selectedTab === tabName) {
+    if (this.selectedTab === tabName)
       return 'active';
-    }
-    //isDarkTheme -> bg-secondary && text light
     return this.themeService.darkModeEnabled ? 'text-light' : 'text-dark';
   }
   getNavbarIcon(): string {

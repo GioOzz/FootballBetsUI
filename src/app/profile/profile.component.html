@@ -1,1 +1,132 @@
-<p>This is the profile page!</p>
+<div class="container text-center">
+    <div class="row">
+        <div class="col">
+            <div class="card" [ngClass]="{'dark-theme': themeService.isDarkTheme()}">
+                <div class="card-body">
+                    <div class="d-flex flex-column align-items-center text-center">
+                        <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle"
+                            width="130">
+                        <div class="mt-3 mb-3">
+                            <p>Welcome back </p>
+                            <h4>{{userData?.userName}} !</h4>
+                        </div>
+                        <div class="col-4 d-grid gap-2">
+                            <button class="btn raise" type="button">Deposit</button>
+                            <button class="btn raise" type="button" data-bs-toggle="modal"
+                                data-bs-target="#logOutModal">Log Out</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-8">
+            <div class="card">
+                <div class="card" [ngClass]="{'dark-theme': themeService.isDarkTheme()}">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col">
+                                <h6 class="mb-0">Username</h6>
+                            </div>
+                            <div class="col">{{userData?.userName}}</div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col">
+                                <h6 class="mb-0">Email</h6>
+                            </div>
+                            <div class="col">{{userData?.email}}</div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col">
+                                <h6 class="mb-0">Wallet</h6>
+                            </div>
+                            <div class="col">{{userData?.wallet}}</div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col">
+                                <h6 class="mb-0">Member since</h6>
+                            </div>
+                            <div class="col">{{userData?.dateCreated | date : 'dd/MM/yyyy'}}</div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col">
+                                <h6 class="">Enabled Competitions</h6>
+                            </div>
+                            <div class="col">
+                                <ul *ngFor="let comp of userPermissionActive">
+                                    <p><img [src]="comp.icon" width="15px" class="m-2" alt="Logo">{{ comp.title }}</p>
+                                </ul>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col">
+                                <button class="btn raise" type="button">Edit Profile</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col">
+            <div class="card h-100">
+                <div class="card-body" [ngClass]="{'dark-theme': themeService.isDarkTheme()}">
+                    <div class="d-inline-flex">
+                        <mat-icon fontIcon="history"></mat-icon>
+                        <h6 class="p-1">BetSlip Played</h6>
+                    </div>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">First BetSlip</li>
+                        <li class="list-group-item">A second BetSlip</li>
+                        <li class="list-group-item">A third BetSlip</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card h-100">
+                <div class="card-body" [ngClass]="{'dark-theme': themeService.isDarkTheme()}">
+                    <h6 class="d-flex align-items-center mb-3"><i
+                            class="material-icons text-info mr-2">assignment</i>Open
+                        BetSlip</h6>
+                    <small>Mobile Template</small>
+                    <div class="progress mb-3" style="height: 5px">
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: 55%" aria-valuenow="55"
+                            aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <small>Backend API</small>
+                    <div class="progress mb-3" style="height: 5px">
+                        <div class="progress-bar bg-primary" role="progressbar" style="width: 66%" aria-valuenow="66"
+                            aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="logOutModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Confirm the log out</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure to exit from the application?
+                You will be redirect in the login page
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" (click)="logOut()">Log Out</button>
+            </div>
+        </div>
+    </div>
+</div>

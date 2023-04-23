@@ -1,39 +1,39 @@
 /* You can add global styles to this file, and also import other style files */
-$primary : green;
-$secondary : rgb(42, 83, 42);
-$accent : lime;
+$primary : rgb(0, 223, 0);
+$secondary : rgb(66, 121, 66);
+$accent : rgb(28, 103, 28);
 $danger: red;
 
 @import "bootstrap";
 
 /* Provide sufficient contrast against white background */
-
 html,
 body {
     width: 100% !important;
     height: 100% !important;
-}
-
-body {
-    margin: 0;
-    font-family: Roboto, "Helvetica Neue", sans-serif;
-}
-
-html,
-body {
-    height: 100%;
-}
-
-body {
     margin: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
 .dark-theme {
-    background-color: rgba(85, 104, 75, 0.753);
-    color: darkgreen;
+    background-color: rgba(109, 143, 91, 0.753);
+    color: rgba(227, 255, 223, 0.936);
 
-    mat-cell {
-        color: white
+    h6 {
+        color: $accent;
     }
+    
+    button {
+        color: white;
+        background-color: $secondary;
+        :hover,
+        :focus {
+          box-shadow: 0 0.5em 0.5em -0.4em var(--hover);
+          transform: translateY(-0.25em);
+        }
+    }
+}
+
+.dark-theme-bg {
+    background-color: rgba(143, 197, 114, 0.753);
 }

@@ -27,32 +27,31 @@ export class MatchesComponent implements OnInit {
     permission: 'TIER_ONE',
     competitions: 'PL,SA,FL1,BL1,PD,CL'
   };
-  // competitions: 'PL,SA'
 
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(private footballDataService: FootballDataService, private _themeService: ThemeService) {
     this.themeService = _themeService;
-    this.displayedColumns = ['competition', 'date', 'match'];
+    this.displayedColumns = ['competition', 'utcDate', 'match'];
 
   }
 
   ngOnInit(): void {
-    // if (localStorage.length == 0) { alert("User not logged, please log in"); return; }
-    this.footballDataService.getMatches(this.filters).subscribe(data => {
-      let allMatches: Match[] = [];
-      data.forEach((value: Match[], key: string) => {
-        allMatches = allMatches.concat(value);
-      });
-      this.dataSource = new MatTableDataSource(allMatches);
-      this.dataSource.paginator = this.paginator;
-      //this.dataSource.filterPredicate = this.filterMatches();
-      this.dataSource.sort = this.sort;
-      this.paginator._intl.itemsPerPageLabel = 'Matches per page:';
-      this.paginator._intl.getRangeLabel = this.getRangeLabel;
-      this.paginator.pageSize = 10;
-    });
+    if (localStorage.length == 0) { alert("User not logged, please log in"); return; }
+    // this.footballDataService.getMatches(this.filters).subscribe(data => {
+    //   let allMatches: Match[] = [];
+    //   data.forEach((value: Match[], key: string) => {
+    //     allMatches = allMatches.concat(value);
+    //   });
+    //   this.dataSource = new MatTableDataSource(allMatches);
+    //   this.dataSource.paginator = this.paginator;
+    //   this.dataSource.sort = this.sort;
+    //   this.paginator._intl.itemsPerPageLabel = 'Matches per page:';
+    //   this.paginator._intl.getRangeLabel = this.getRangeLabel;
+    //   this.paginator.pageSize = 10;
+    // });
+    alert("ngOnInit matches.component");
   }
 
   ngAfterViewInit(): void {
@@ -63,14 +62,9 @@ export class MatchesComponent implements OnInit {
     this.paginator.pageIndex = event.pageIndex;
     this.paginator.pageSize = event.pageSize;
   }
-
   getRangeLabel(page: number, pageSize: number, length: number) {
     const start = page * pageSize + 1;
     const end = (page + 1) * pageSize > length ? length : (page + 1) * pageSize;
     return `${start} - ${end} of ${length}`;
   }
-  isDarkTheme() {
-    return this.themeService.darkModeEnabled;
-  }
-  //take user data 
 }

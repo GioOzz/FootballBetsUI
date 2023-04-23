@@ -1,11 +1,12 @@
 {
   "name": "football-bets-ui",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "scripts": {
     "ng": "ng",
     "start": "ng serve --proxy-config proxy.conf.json",
     "build": "ng build",
-    "watch": "ng build --watch --configuration development",
+    "build:dev" : "ng build --watch",
+    "watch": "ng build --watch --configuration development --deploy-url /football-bets-ui/ --base-href /football-bets-ui/",
     "test": "ng test"
   },
   "private": true,

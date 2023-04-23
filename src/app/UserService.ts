@@ -2,9 +2,8 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { Injectable } from '@angular/core';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { v4 as uuidv4 } from 'uuid';
 
-const apiUrl = 'https://localhost:44390/User/'
+const apiUrl = 'https://localhost:5000/User/'
 const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json; charset=utf-8', 'Access-Control-Allow-Origin': '*' }) };
 const userData = localStorage.getItem('userdata') ?? "";
 
@@ -30,7 +29,6 @@ export class UserService {
 
   register(username: string, password: string, email: string) {
     return this.http.post(`${apiUrl}NewUser`, {
-      id: uuidv4(),
       userName: username,
       email: email,
       password: password
