@@ -1,21 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NavbarService } from '../NavbarService';
 import { ThemeService } from '../ThemeService';
+import { UserService } from '../UserService';
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.css']
 })
-export class ProfileComponent implements OnInit {
-  constructor(private navbarService: NavbarService, private _themeService: ThemeService) {
-    this.navbarService.setActiveItem('profile');
-    this.themeService = this._themeService;
-  }
 
+
+export class ProfileComponent implements OnInit {
+  constructor(private navbarService: NavbarService, private userService: UserService, themeService: ThemeService) {
+    this.navbarService.setActiveItem('profile');
+    this.themeService = themeService;
+  }
   themeService: ThemeService;
   userData: UserData | undefined;
   userPermissionActive: Array<ActivePermissions> = [];
+  amount: number = 0.0;
 
   ngOnInit(): void {
     this.userData = JSON.parse(localStorage.getItem('userdata') || '{}') as UserData;
@@ -64,6 +67,19 @@ export class ProfileComponent implements OnInit {
     // localStorage.clear();
     location.replace(" ");
   }
+
+  updateWallet() {
+    this.userService.updateWallet(this.amount).subscribe({
+      next: (data) => {
+        location.reload();
+      },
+      error: (err) => {
+        const toastBootstrap = document.getElementById('walletError');
+        toastBootstrap?.classList.add('show');
+          
+      }
+    });
+  }
 }
 
 export interface UserData {
@@ -91,13 +107,3 @@ export interface ActivePermissions {
   icon: string;
   title: string;
 }
-// id:2
-// userName:"testusername1"
-// email:"test2@test.dev"
-// password:"test123"
-// dateCreated:"2023-04-21"
-// dateUpdate:"2023-04-21"
-// permissions:{ idPermission: 2, userId: 2, eng: false, ita: false, ger: false}
-// betSlips:[]
-// wallet:0
-

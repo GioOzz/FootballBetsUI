@@ -12,7 +12,6 @@ const userData = localStorage.getItem('userdata') ?? "";
 })
 export class UserService {
   _http: HttpClient;
-
   constructor(private http: HttpClient) { this._http = http; }
 
   login(username: string, password: string) {
@@ -40,13 +39,20 @@ export class UserService {
   }
 
   logout() {
-    localStorage.clear();
+    //localStorage.clear();
     location.replace("/");
   }
 
+  updateWallet(updateAmount : number) {
+    let jsonData = JSON.parse(userData).value;
+    return this.http.put(`${apiUrl}UpdateWallet`, {
+      jsonData, 
+      updateAmount
+    });
+  }
+
   updateUserPassword(newpsw: string) {
-    var jsonData = JSON.parse(userData).value;
-    console.log("UserService, updateUserPassword, jsonData -----> ", jsonData);
+    let jsonData = JSON.parse(userData).value;
     return this.http.put(`${apiUrl}ChangePassword`, {
       jsonData,
       newpsw
