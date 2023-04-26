@@ -24,6 +24,7 @@ export class RegisterComponent {
       next: (data) => {
         this.isSuccessful = true;
         this.isSignUpFailed = false;
+        location.replace(" ");
       },
       error: (err) => {
         this.isSignUpFailed = true;

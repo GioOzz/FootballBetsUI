@@ -10,12 +10,17 @@
                             <p>Welcome back </p>
                             <h4>{{userData?.userName}} !</h4>
                         </div>
-                        <div class="col-4 d-grid gap-2">
-                            <button class="btn raise" type="button" data-bs-toggle="modal"
-                                data-bs-target="#depositModal">
-                                Deposit </button>
-                            <button class="btn raise" type="button" data-bs-toggle="modal"
-                                data-bs-target="#logOutModal">Log Out</button>
+                        <div class="row row-cols-lg-2">
+                            <div class="d-grid gap-2 col-6 mx-auto">
+                                <button class="btn raise" type="button" data-bs-toggle="modal"
+                                    data-bs-target="#depositModal">Deposit</button>
+                                <button class="btn raise" type="button" data-bs-toggle="modal"
+                                    data-bs-target="#cashOutModal">Cashout</button>
+                            </div>
+                            <div class="d-grid gap-2 col-6 mx-auto">
+                                <button class="btn raise" type="button" data-bs-toggle="modal"
+                                    data-bs-target="#logOutModal">Logout</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -134,10 +139,10 @@
 </div>
 <div class="modal fade" id="depositModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Select the amount of the deposit</h1>
+                <h1 class="modal-title fs-5 text-center" id="modalTitle">Insert the deposit amount</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -145,7 +150,27 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" (click)="updateWallet()" data-bs-dismiss="modal">Next</button>
+                <button type="button" class="btn btn-primary" (click)="depositWallet(true)"
+                    data-bs-dismiss="modal">Deposit</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="cashOutModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5 text-center" id="modalTitle">Insert the cashout amount</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <input type="number" placeholder="Amount" id="amount" [(ngModel)]="amount">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" (click)="depositWallet(false)"
+                    data-bs-dismiss="modal">Cashout</button>
             </div>
         </div>
     </div>
@@ -154,7 +179,7 @@
     <div class="toast align-items-center text-bg-warning border-0" role="alert" aria-live="assertive" aria-atomic="true"
         id="walletError">
         <div class="d-flex">
-            <div class="toast-body">
+            <div class="toast-body" id="toast-message">
                 An error accouring while updating the wallet. Please try again later.
             </div>
             <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"

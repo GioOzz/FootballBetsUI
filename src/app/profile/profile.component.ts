@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavbarService } from '../NavbarService';
 import { ThemeService } from '../ThemeService';
 import { UserService } from '../UserService';
@@ -23,7 +23,44 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this.userData = JSON.parse(localStorage.getItem('userdata') || '{}') as UserData;
     console.log("userData profile.component.ts", this.userData);
-    let userPermission = this.userData.permissions as UserPermissions;
+    this.loadPermission(this.userData.permissions, this.userData);
+    //possibility of change user psw, user email, edit the wallet with put 
+  }
+
+  logOut() {
+    // localStorage.clear();
+    location.replace(" ");
+  }
+
+  depositWallet(depositOpt: boolean) {
+    let userId = this.userData?.id;
+    if (Number.isInteger(userId) && this.amount > 0) {
+      this.userService.depositWallet(userId, this.amount, depositOpt).subscribe({
+        next: (data) => {
+          localStorage.removeItem('userdata');
+          localStorage.setItem('userdata', JSON.stringify(data));
+          this.loadPermission(this.userData?.permissions as UserPermissions, data as UserData);
+          location.reload();
+        },
+        error: (err) => {
+          const toastBootstrap = document.getElementById('walletError');
+          toastBootstrap?.classList.add('show');
+        }
+      });
+    }
+    else {
+      const toastBootstrap = document.getElementById('walletError');
+      let divMessage = document.getElementById('toast-message');
+      if (divMessage)
+        divMessage.innerText = "Invalid amount of the transaction required";
+      toastBootstrap?.classList.add('show');
+    }
+  }
+
+  loadPermission(userPermission: UserPermissions, userData : UserData) {
+    if (userPermission == null) {
+      this.userService.getPermissions(userData.id)
+    }
     if (userPermission.eng)
       this.userPermissionActive.push({
         icon: 'https://crests.football-data.org/770.svg',
@@ -60,25 +97,6 @@ export class ProfileComponent implements OnInit {
         icon: 'https://cdn-icons-png.flaticon.com/512/1208/1208117.png',
         title: "No competition avaliable for your profile."
       });
-    //possibility of change user psw, user email, edit the wallet with put 
-  }
-
-  logOut() {
-    // localStorage.clear();
-    location.replace(" ");
-  }
-
-  updateWallet() {
-    this.userService.updateWallet(this.amount).subscribe({
-      next: (data) => {
-        location.reload();
-      },
-      error: (err) => {
-        const toastBootstrap = document.getElementById('walletError');
-        toastBootstrap?.classList.add('show');
-          
-      }
-    });
   }
 }
 
@@ -91,7 +109,7 @@ export interface UserData {
   dateUpdate: Date;
   wallet: number;
   permissions: UserPermissions
-  betSlips: [] // BetSlip
+  betSlips: [] // BetSlip 
 }
 export interface UserPermissions {
   idPermission: number;

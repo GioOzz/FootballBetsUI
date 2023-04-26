@@ -55,6 +55,9 @@
             <div *ngIf="f.submitted && isSignUpFailed">
               <a class="links" href="/register">Retry with other credentials? &nbsp;</a>
             </div>
+            <div *ngIf="isSuccessful">
+              <a class="links" href="/login">Signup succedeed!&nbsp;</a>
+            </div>
           </form>
         </div>
       </div>
