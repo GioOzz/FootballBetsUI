@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { NavigationEnd, Router, RouterStateSnapshot } from '@angular/router';
 import { NavbarService } from '../NavbarService';
 import { ThemeService } from '../ThemeService';
 
@@ -8,20 +7,16 @@ import { ThemeService } from '../ThemeService';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent {
   selectedTab = 'home';
   theme: string = '';
   isDarkMode: boolean;
 
   constructor(private themeService: ThemeService, navbarService: NavbarService) {
     this.isDarkMode = this.themeService.darkModeEnabled;
-    navbarService.activeItem$.subscribe((item) => {
+    navbarService.activeItem$.subscribe((item : any) => {
       this.selectedTab = item;
     });
-  }
-
-  ngOnInit() {
-
   }
   toggleDarkMode(): void {
     this.isDarkMode = !this.isDarkMode;
@@ -46,4 +41,5 @@ export class NavbarComponent implements OnInit {
   isActive(item: string) {
     return item === this.selectedTab;
   }
+  // write me the css code for the navbar knowing i'm using this ts 
 }

@@ -38,7 +38,7 @@ export class MatchesComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (localStorage.length == 0) { alert("User not logged, please log in"); return; }
+    //if (localStorage.length == 0) { alert("User not logged, please log in"); return; }
     // this.footballDataService.getMatches(this.filters).subscribe(data => {
     //   let allMatches: Match[] = [];
     //   data.forEach((value: Match[], key: string) => {
@@ -51,7 +51,7 @@ export class MatchesComponent implements OnInit {
     //   this.paginator._intl.getRangeLabel = this.getRangeLabel;
     //   this.paginator.pageSize = 10;
     // });
-    alert("ngOnInit matches.component");
+    //alert("ngOnInit matches.component");
   }
 
   ngAfterViewInit(): void {

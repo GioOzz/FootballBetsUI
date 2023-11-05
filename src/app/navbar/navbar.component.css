@@ -1,67 +1,40 @@
-.active{
-    background-color: #376cdf;
-    border-radius: 30px;
+.navbar {
+    background-color: #333;
 }
 
-
-.navbar-nav .nav-item .nav-link:hover:not(.active) {
-    background-color: rgba(117, 106, 106, 0.694);
-    border-radius: 30px;
-    transition: background-color 0.3s ease;
-}
-
-.dropdown {
-    position: relative;
-}
-
-.dropdown-content {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    z-index: 1;
-}
-
-.dropdown:hover .dropdown-content {
-    display: block;
-}
-
-.theme-toggle-button {
-    border: none;
-    border-radius: 4px;
-    padding: 0.5rem 1rem;
-    font-size: 1rem;
-    font-weight: bold;
-    background-color: #007bff;
+.navbar-brand {
     color: #fff;
-    cursor: pointer;
 }
 
-.theme-toggle-button:hover {
-    background-color: #0069d9;
-}
-
-.theme-toggle-button span {
-    margin-right: 0.5rem;
-}
-
-button.mat-icon-button {
-    background-color: transparent;
-    border-radius: 50%;
-    border: none;
-    padding: 8px;
-  }
-  
-  button.mat-icon-button:hover {
-    background-color: rgba(106, 121, 94, 0.863);
-  }
-  
-  button.mat-icon-button:focus {
-    outline: none;
-  }
-  
-  button.mat-icon-button .mat-icon {
-    font-size: 24px;
+.navbar-nav .nav-link {
     color: #fff;
-  }
-  
+}
+
+.navbar-nav .nav-link .mat-icon {
+    color: #000;
+    /* Change this color to make the icons visible */
+    width: 24px;
+    /* Increase the size of the icons */
+    height: 24px;
+    /* Increase the size of the icons */
+}
+
+.navbar-toggler {
+    border-color: #fff;
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(0, 0, 0, 0.5)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+.mat-icon.dark_mode {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+}
+
+.mat-icon svg {
+    width: 24px;
+    height: 24px;
+    fill: currentColor;
+}

@@ -4,7 +4,7 @@ import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { UserData } from './profile/profile.component';
 
-const apiUrl = 'https://localhost:5000/User/'
+const apiUrl = 'http://localhost:5200/api/User/'
 const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json; charset=utf-8', 'Access-Control-Allow-Origin': '*' }) };
 const userData = localStorage.getItem('userdata') ?? "";
 
@@ -17,7 +17,7 @@ export class UserService {
   constructor(private http: HttpClient) { this._http = http; }
 
   login(username: string, password: string) {
-    return this.http.post(`${apiUrl}Login`, {
+    return this.http.post(`${apiUrl}login`, {
       "userName": username,
       "password": password
     }, httpOptions)
@@ -29,7 +29,7 @@ export class UserService {
   }
 
   register(username: string, password: string, email: string) {
-    return this.http.post(`${apiUrl}NewUser`, {
+    return this.http.post(`${apiUrl}register`, {
       userName: username,
       email: email,
       password: password
