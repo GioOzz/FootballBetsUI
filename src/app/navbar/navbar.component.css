@@ -1,40 +1,23 @@
 .navbar {
     background-color: #333;
 }
+.my-nav .collapse {
+    position: fixed;
+    right: 0;
+    top: 3.5rem;
+}
 
 .navbar-brand {
     color: #fff;
-}
-
-.navbar-nav .nav-link {
-    color: #fff;
-}
-
-.navbar-nav .nav-link .mat-icon {
-    color: #000;
-    /* Change this color to make the icons visible */
-    width: 24px;
-    /* Increase the size of the icons */
-    height: 24px;
-    /* Increase the size of the icons */
-}
-
-.navbar-toggler {
-    border-color: #fff;
 }
 
 .navbar-toggler-icon {
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(0, 0, 0, 0.5)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
 }
 
-.mat-icon.dark_mode {
+.navbar-brand {
+    font-size: 30;
     display: inline-block;
-    width: 24px;
-    height: 24px;
-}
-
-.mat-icon svg {
-    width: 24px;
-    height: 24px;
-    fill: currentColor;
+    line-height: 2%;
+    text-align: left;
 }

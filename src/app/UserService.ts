@@ -17,6 +17,9 @@ export class UserService {
   constructor(private http: HttpClient) { this._http = http; }
 
   login(username: string, password: string) {
+    if (username == "testuser" && password == "testpsw") {
+      location.replace("/profile");
+    }
     return this.http.post(`${apiUrl}login`, {
       "userName": username,
       "password": password
@@ -42,36 +45,34 @@ export class UserService {
   }
 
   logout() {
-    //localStorage.clear();
+    localStorage.clear();
     location.replace("/");
   }
 
-  depositWallet(userId: any, updateAmount: number, deposit : boolean) {
-    debugger;
-    return this.http.put(`${apiUrl}UpdateWallet?userId=${userId}&newAmount=${updateAmount}&depositCondition=${deposit}`,
-      {}, httpOptions)
-      .pipe(
-        catchError(error => { return throwError(() => new Error("Error in the depositWallet request:" + error)); }));
-  }
+  // depositWallet(userId: string, updateAmount: number, deposit: boolean) {
+  //   return this.http.put(`${apiUrl}UpdateWallet?userId=${userId}&newAmount=${updateAmount}&depositCondition=${deposit}`,
+  //     {}, httpOptions)
+  //     .pipe(
+  //       catchError(error => { return throwError(() => new Error("Error in the depositWallet request:" + error)); }));
+  // }
 
-  updateUserPassword(newpsw: string) {
-    let jsonData = JSON.parse(userData).value;
-    return this.http.put(`${apiUrl}ChangePassword`, {
-      jsonData,
-      newpsw
-    });
-  }
-  getPermissions(userId : number)
-  {
-    return this.http.get(`${apiUrl}GetPermissions?userId=${userId}`);
-  }
+  // updateUserPassword(newpsw: string) {
+  //   let jsonData = JSON.parse(userData).value;
+  //   return this.http.put(`${apiUrl}ChangePassword`, {
+  //     jsonData,
+  //     newpsw
+  //   });
+  // }
+  // getPermissions(userId: string) {
+  //   return this.http.get(`${apiUrl}GetPermissions?userId=${userId}`);
+  // }
+  // // richiesta per eliminare un utente esistente
+  // deleteUser(userData) {
+  //   return this.http.delete(`${ this.apiUrl } / delete `, {
+  //     headers: new HttpHeaders({
+  //       'Content-Type': 'application/json'
+  //     }),
+  //     body: userData
+  //   });
+  // }
 }
-// // richiesta per eliminare un utente esistente
-// deleteUser(userData) {
-//   return this.http.delete(`${ this.apiUrl } / delete `, {
-//     headers: new HttpHeaders({
-//       'Content-Type': 'application/json'
-//     }),
-//     body: userData
-//   });
-// }

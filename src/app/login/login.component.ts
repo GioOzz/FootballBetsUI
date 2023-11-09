@@ -1,7 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { UserService } from '../UserService';
-import { NavbarService } from '../NavbarService';
-import { ThemeService } from '../ThemeService';
 
 @Component({
   selector: 'login',
@@ -15,8 +13,14 @@ export class LoginComponent {
   errorMessage = '';
   permission: string[] = [];
   form: any = { username: null, password: null };
-
+  
   constructor(private userService: UserService) { }
+  
+  @HostListener('document:keypress', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent) {
+    if (event.key == "Enter")
+      this.submit();
+  }
 
   submit() {
     const { username, password } = this.form;

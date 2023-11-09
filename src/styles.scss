@@ -1,5 +1,5 @@
 /* You can add global styles to this file, and also import other style files */
-$primary : rgb(0, 223, 0);
+$primary : rgba(3, 182, 3, 0.555);
 $secondary : rgb(66, 121, 66);
 $accent : rgb(28, 103, 28);
 $danger: red;
@@ -14,15 +14,15 @@ html, body {
 }
 
 .dark-theme {
-    background-color: rgba(109, 143, 91, 0.753);
-    color: rgba(227, 255, 223, 0.936);
+    background-color: rgba(65, 65, 65, 0.753);
+    color: rgba(233, 253, 230, 0.936);
 
     h6 {
         color: $accent;
     }
     
     button {
-        color: white;
+        color: rgb(68, 67, 67);
         background-color: $secondary;
         :hover,
         :focus {

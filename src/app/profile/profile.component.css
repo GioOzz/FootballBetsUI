@@ -1,21 +1,65 @@
-.card {
-    box-shadow: 0 1px 3px 0 black, 0 1px 1.5px 0 rgba(0, 0, 0, 0.4);
-    word-wrap: break-word;
-    background-clip: border-box;
-    border: 0 solid rgba(0, 0, 0, .125);
-    border-radius: .25rem;
-    height: fit-content;
+.profile-card {
+    margin-top: 20px;
 }
 
-.card-body {
-    flex: 1 1 auto;
-    min-height: 1px;
-    padding: 1rem;
+.profile-card .card {
+    margin-bottom: 30px;
+    border: none;
+    background: #eee;
 }
 
-.raise:hover,
-.raise:focus {
-    box-shadow: 0 0.5em 0.5em -0.4em var(--hover);
-    transform: translateY(-0.25em);
-    background-color: rgb(93, 203, 109);
+.profile-card .card .card-body {
+    padding: 20px;
+}
+
+.profile-card .card .card-body .profile-image {
+    text-align: center;
+}
+
+.profile-card .card .card-body .profile-image img {
+    width: 130px;
+    border-radius: 50%;
+}
+
+.profile-card .card .card-body .profile-name {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.profile-card .card .card-body .profile-name h4 {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 0;
+}
+
+.profile-card .card .card-body .profile-name p {
+    color: #aaa;
+}
+
+.profile-card .card .card-body .profile-name p span {
+    color: #000;
+}
+
+.profile-card .card .card-body .profile-name p .badge {
+    font-size: 12px;
+    padding: 5px 10px;
+    background: #000;
+    color: #fff;
+}
+
+.profile-card .card .card-body .profile-name .btn {
+    margin-top: 20px;
+    width: 100%;
+    padding: 10px;
+    border-radius: 0;
+    font-size: 12px;
+}
+
+.profile-card .card .card-body .profile-name .btn .fa {
+    margin-right: 5px;
+}
+
+.profile-card .card .card-body .profile-name .btn.btn-danger {
+    background: #ff5e5e;
+    border-color: #ff5e5e;
 }

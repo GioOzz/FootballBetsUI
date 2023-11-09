@@ -23,43 +23,42 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this.userData = JSON.parse(localStorage.getItem('userdata') || '{}') as UserData;
     console.log("userData profile.component.ts", this.userData);
-    this.loadPermission(this.userData.permissions, this.userData);
+    //this.loadPermission(this.userData.permissions, this.userData);
     //possibility of change user psw, user email, edit the wallet with put 
   }
 
   logOut() {
-    // localStorage.clear();
-    location.replace(" ");
+    this.userService.logout();
   }
 
   depositWallet(depositOpt: boolean) {
     let userId = this.userData?.id;
-    if (Number.isInteger(userId) && this.amount > 0) {
-      this.userService.depositWallet(userId, this.amount, depositOpt).subscribe({
-        next: (data) => {
-          localStorage.removeItem('userdata');
-          localStorage.setItem('userdata', JSON.stringify(data));
-          this.loadPermission(this.userData?.permissions as UserPermissions, data as UserData);
-          location.reload();
-        },
-        error: (err) => {
-          const toastBootstrap = document.getElementById('walletError');
-          toastBootstrap?.classList.add('show');
-        }
-      });
-    }
-    else {
-      const toastBootstrap = document.getElementById('walletError');
-      let divMessage = document.getElementById('toast-message');
-      if (divMessage)
-        divMessage.innerText = "Invalid amount of the transaction required";
-      toastBootstrap?.classList.add('show');
-    }
+    // if (Number.isInteger(userId) && this.amount > 0) {
+    //   this.userService.depositWallet(userId, this.amount, depositOpt).subscribe({
+    //     next: (data) => {
+    //       localStorage.removeItem('userdata');
+    //       localStorage.setItem('userdata', JSON.stringify(data));
+    //       this.loadPermission(this.userData?.permissions as UserPermissions, data as UserData);
+    //       location.reload();
+    //     },
+    //     error: (err) => {
+    //       const toastBootstrap = document.getElementById('walletError');
+    //       toastBootstrap?.classList.add('show');
+    //     }
+    //   });
+    // }
+    // else {
+    //   const toastBootstrap = document.getElementById('walletError');
+    //   let divMessage = document.getElementById('toast-message');
+    //   if (divMessage)
+    //     divMessage.innerText = "Invalid amount of the transaction required";
+    //   toastBootstrap?.classList.add('show');
+    // }
   }
 
   loadPermission(userPermission: UserPermissions, userData : UserData) {
     if (userPermission == null) {
-      this.userService.getPermissions(userData.id)
+      //this.userService.getPermissions(userData.id)
     }
     if (userPermission.eng)
       this.userPermissionActive.push({
@@ -100,16 +99,17 @@ export class ProfileComponent implements OnInit {
   }
 }
 
+
 export interface UserData {
-  id: number;
+  id: string;
   userName: string;
   email: string;
   password: string;
   dateCreated: Date;
   dateUpdate: Date;
   wallet: number;
-  permissions: UserPermissions
-  betSlips: [] // BetSlip 
+  permissions: UserPermissions[];
+  betSlips: [] //BetSlip[];
 }
 export interface UserPermissions {
   idPermission: number;

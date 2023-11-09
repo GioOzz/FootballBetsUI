@@ -1,48 +1,40 @@
-<nav class="navbar navbar-expand-md" [ngClass]="getNavbarTheme()">
-    <div class="container-fluid d-flex justify-content-between">
-        <div class="d-flex align-items-center">
-            <a class="navbar-brand" href="#" [ngClass]="getNavbarTextTheme('logo')">
-                <img [src]="getNavbarIcon()" width="50px" alt="Logo" class="d-inline-block align-text-center"> Football
-                Bets
+<nav class="navbar navbar-expand-md {{ getNavbarTheme()}}">
+    <div class="container-fluid">
+        <a routerLink="home" class="navbar-brand {{ getNavbarTextTheme('logo')}}">
+            <img class="logo" src="{{ getNavbarIcon()}}" width="30" alt="Logo">
+            Football Bets ®
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler"
+            aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarToggler">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0 align-text-right">
+                <li class="nav-item">
+                    <a href="/home" class="nav-link {{ getNavbarTextTheme('home')}}"
+                        (click)="selectedTab = 'home'">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link {{getNavbarTextTheme('leagues')}}"
+                        (click)="selectedTab = 'leagues'">Leagues</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link {{getNavbarTextTheme('settings')}}"
+                        (click)="selectedTab = 'settings'">Settings</a>
+                </li>
+                <li class="nav-item">
+                    <a href="/profile" class="nav-link {{getNavbarTextTheme('profile')}}"
+                        (click)="selectedTab = 'profile'">Profile</a>
+                </li>
+            </ul>
+            <a class="nav-link {{ getNavbarTextTheme('dark-theme')}}" (click)="toggleDarkMode()">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                    class="bi bi-moon-fill" viewBox="0 0 16 16">
+                    <path
+                        d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278z" />
+                </svg>
             </a>
-        </div>
-        <div class="d-flex justify-content-end align-items-center">
-            <div class="navbar-nav d-md-none">
-                <a class="nav-link" [ngClass]="getNavbarTextTheme('dark-theme')" (click)="toggleDarkMode()">
-                    <span class="mat-icon dark_mode"></span>
-                </a>
-            </div>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="navbar-nav d-none d-md-block">
-                <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link" href="/home" [ngClass]="getNavbarTextTheme('home')"
-                                (click)="selectedTab = 'home'">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" [ngClass]="getNavbarTextTheme('leagues')"
-                                (click)="selectedTab = 'leagues'">Leagues</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" [ngClass]="getNavbarTextTheme('settings')"
-                                (click)="selectedTab = 'settings'">Settings</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/profile" [ngClass]="getNavbarTextTheme('profile')"
-                                (click)="selectedTab = 'profile'">Profile</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" [ngClass]="getNavbarTextTheme('dark-theme')" (click)="toggleDarkMode()">
-                                <span class="mat-icon dark_mode"></span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
         </div>
     </div>
 </nav>
+<br>

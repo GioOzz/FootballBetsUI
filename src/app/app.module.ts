@@ -4,12 +4,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { MatTableModule } from '@angular/material/table';
+import { MatTabsModule } from '@angular/material/tabs';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatListModule } from '@angular/material/list';
+
 
 
 import { AppComponent } from './app.component';
@@ -58,7 +60,8 @@ import { BetslipComponent } from './betslip/betslip.component';
     MatInputModule,
     MatFormFieldModule,
     MatTableModule,
-    MatListModule
+    MatListModule,
+    MatTabsModule
   ],
   exports: [
     FormsModule,
