@@ -1,94 +1,116 @@
 <div class="container text-center">
     <div class="card" [ngClass]="{'dark-theme': themeService.isDarkTheme()}">
         <div class="card-body">
-            <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle"
+            <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="User avatar" class="rounded-circle"
                 width="130">
-            <p>Welcome back </p>
-            <h4>{{userData?.userName}} !</h4>
-            <button class="btn raise" type="button" data-bs-toggle="modal"
-                data-bs-target="#depositModal">Deposit</button>
-            <button class="btn raise" type="button" data-bs-toggle="modal"
-                data-bs-target="#cashOutModal">Cashout</button>
-            <button class="btn raise" type="button" data-bs-toggle="modal" data-bs-target="#logOutModal">Logout</button>
+            <h4>
+                Welcome back <b> {{userData?.userName}} ! </b>
+            </h4>
+            <div class="container row text-center">
+                <button class="btn raise col-sm btn-outline-secondary m-1" type="button" data-bs-toggle="modal"
+                    data-bs-target="#depositModal">Deposit</button>
+                <button class="btn raise col-sm btn-outline-secondary m-1" type="button" data-bs-toggle="modal"
+                    data-bs-target="#cashOutModal">Cashout</button>
+                <button class="btn raise col-sm btn-outline-secondary m-1" type="button" data-bs-toggle="modal"
+                    data-bs-target="#logOutModal">Logout</button>
+            </div>
             <br>
             <mat-divider [inset]="true"></mat-divider>
-            <mat-tab-group>
-                <mat-tab label="Profile">
-                    <div class="card" [ngClass]="{'dark-theme': themeService.isDarkTheme()}">
-                        <hr>
-                        <div class="row">
-                            <div class="col">
+            <br>
+            <div class="container" [ngClass]="{'dark-theme': themeService.isDarkTheme()}">
+                <mat-tab-group>
+                    <mat-tab label="Profile">
+                        <div class="container row">
+                            <hr>
+                            <div class="col-6">
                                 <h6 class="mb-0">Email</h6>
                             </div>
-                            <div class="col">{{userData?.email}}</div>
-                        </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col">
+                            <div class="col-6">
+                                <p> {{userData?.email ?? "email@not.found"}} </p>
+                            </div>
+                            <hr>
+                            <div class="col-6">
                                 <h6 class="mb-0">Wallet</h6>
                             </div>
-                            <div class="col">{{userData?.wallet}}</div>
-                        </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col">
+                            <div class="col-6">
+                                <p> {{userData?.wallet ?? "example $123.64"}} </p>
+                            </div>
+                            <hr>
+                            <div class="col-6">
                                 <h6 class="mb-0">Member since</h6>
                             </div>
-                            <div class="col">{{userData?.dateCreated | date : 'dd/MM/yyyy'}}</div>
-                        </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col">
+                            <div class="col-6">
+                                <p> {{userData?.dateCreated ?? nowdate }} </p>
+                            </div>
+                            <hr>
+                            <div class="col-6">
                                 <h6 class="">Enabled Competitions</h6>
                             </div>
-                            <div class="col">
-                                <ul *ngFor="let comp of userPermissionActive">
-                                    <p><img [src]="comp.icon" width="15px" class="m-2" alt="Logo">{{
-                                        comp.title
-                                        }}
-                                    </p>
-                                </ul>
+                            <div class="col-6">
+                                <p>
+                                    {{ userPermissionActive.length <= 0 ? "No competitions enabled" :
+                                        userPermissionActive.length }} </p>
                             </div>
                         </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col">
-                                <button class="btn raise" type="button">Edit Profile</button>
+                    </mat-tab>
+                    <mat-tab label="Betslips">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-6">
+                                    <h6>
+                                        <mat-icon fontIcon="history"></mat-icon>
+                                        <p class="text-center">Played</p>
+                                    </h6>
+                                    <ul class="list-group">
+                                        <li class="list-group-item">First BetSlip</li>
+                                        <li class="list-group-item">A second BetSlip</li>
+                                        <li class="list-group-item">A third BetSlip</li>
+                                    </ul>
+                                </div>
+                                <div class="col-6">
+                                    <h6>
+                                        <mat-icon fontIcon="timeline"></mat-icon>
+                                        <p class="text-center">Open</p>
+                                    </h6>
+                                    <ul class="list-group">
+                                        <li class="list-group-item">First BetSlip</li>
+                                        <li class="list-group-item">A second BetSlip</li>
+                                        <li class="list-group-item">A third BetSlip</li>
+                                        <li class="list-group-item">First BetSlip</li>
+                                        <li class="list-group-item">A second BetSlip</li>
+                                        <li class="list-group-item">A third BetSlip</li>
+                                        <li class="list-group-item">First BetSlip</li>
+                                        <li class="list-group-item">A second BetSlip</li>
+                                        <li class="list-group-item">A third BetSlip</li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </mat-tab>
-                <mat-tab label="BetSlips">
-                    <div class="card-body" [ngClass]="{'dark-theme': themeService.isDarkTheme()}">
-                        <div class="d-inline-flex">
-                            <mat-icon fontIcon="history"></mat-icon>
-                            <h6 class="p-1">BetSlip Played</h6>
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item">First BetSlip</li>
-                                <li class="list-group-item">A second BetSlip</li>
-                                <li class="list-group-item">A third BetSlip</li>
-                            </ul>
+                    </mat-tab>
+                    <mat-tab label="History">
+                        <div class="card-body">
+                            <h6 class="d-flex align-items-center mb-3"><i
+                                    class="material-icons text-info mr-2">assignment</i>Open
+                                BetSlip</h6>
+                            <small>Mobile Template</small>
+                            <div class="progress mb-3" style="height: 5px">
+                                <div class="progress-bar bg-primary" role="progressbar" style="width: 55%"
+                                    aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
+                            <small>Backend API</small>
+                            <div class="progress mb-3" style="height: 5px">
+                                <div class="progress-bar bg-primary" role="progressbar" style="width: 66%"
+                                    aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
+                            </div>
                         </div>
-                    </div>
-                </mat-tab>
-                <mat-tab label="History">
-                    <div class="card-body" [ngClass]="{'dark-theme': themeService.isDarkTheme()}">
-                        <h6 class="d-flex align-items-center mb-3"><i
-                                class="material-icons text-info mr-2">assignment</i>Open
-                            BetSlip</h6>
-                        <small>Mobile Template</small>
-                        <div class="progress mb-3" style="height: 5px">
-                            <div class="progress-bar bg-primary" role="progressbar" style="width: 55%"
-                                aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                        <small>Backend API</small>
-                        <div class="progress mb-3" style="height: 5px">
-                            <div class="progress-bar bg-primary" role="progressbar" style="width: 66%"
-                                aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
-                        </div>
-                    </div>
-                </mat-tab>
-            </mat-tab-group>
+                    </mat-tab>
+                </mat-tab-group>
+            </div>
+            <br>
+            <div class=".col-6">
+                <button class="btn raise col-6 col-sm-4 btn-outline-secondary  mr-1" type="button">Edit
+                    Profile</button>
+            </div>
         </div>
     </div>
 </div>
@@ -101,7 +123,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                Are you sure to exit from the application?
+                Are you sure to exit from the application? <br>
                 You will be redirect in the login page
             </div>
             <div class="modal-footer">
@@ -115,11 +137,10 @@
 
 <div class="modal fade" id="depositModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-sm">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5 text-center" id="modalTitle">Insert the deposit
-                    amount</h1>
+                <h1 class="modal-title fs-5 text-center" id="modalTitle">Insert the deposit amount </h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -135,11 +156,10 @@
 </div>
 <div class="modal fade" id="cashOutModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-sm">
+    <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5 text-center" id="modalTitle">Insert the cashout
-                    amount</h1>
+                <h1 class="modal-title fs-5 text-center" id="modalTitle">Insert the cashout amount</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -165,3 +185,4 @@
         </div>
     </div>
 </div>
+<br>

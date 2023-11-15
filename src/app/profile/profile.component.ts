@@ -19,10 +19,12 @@ export class ProfileComponent implements OnInit {
   userData: UserData | undefined;
   userPermissionActive: Array<ActivePermissions> = [];
   amount: number = 0.0;
+  nowdate = new Date().toDateString();
 
   ngOnInit(): void {
     this.userData = JSON.parse(localStorage.getItem('userdata') || '{}') as UserData;
     console.log("userData profile.component.ts", this.userData);
+    console.log(this.nowdate);
     //this.loadPermission(this.userData.permissions, this.userData);
     //possibility of change user psw, user email, edit the wallet with put 
   }
@@ -125,3 +127,6 @@ export interface ActivePermissions {
   icon: string;
   title: string;
 }
+
+// write me the code for this component for retrieve the user data and show it in the profile page, showing buttons and all responsive page
+// in the profile page you have to show the active permission of the user
