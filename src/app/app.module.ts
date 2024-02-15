@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { MatTableModule } from '@angular/material/table';
 import { MatTabsModule } from '@angular/material/tabs';
@@ -26,7 +26,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { LoadingComponent } from './loading/loading.component';
 import { MatchesComponent } from './matches/matches.component';
 import { BetslipComponent } from './betslip/betslip.component';
-
+import { MockInterceptorService } from './MockFooballService';
 
 @NgModule({
   declarations: [
@@ -46,8 +46,8 @@ import { BetslipComponent } from './betslip/betslip.component';
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forRoot([
-      { path: '', component: LoginComponent },
-      { path: 'home', component: HomeComponent },
+      { path: '', component: HomeComponent },
+      { path: 'login', component: LoginComponent },
       { path: 'register', component: RegisterComponent },
       { path: 'home', component: HomeComponent },
       { path: 'profile', component: ProfileComponent }
@@ -73,7 +73,11 @@ import { BetslipComponent } from './betslip/betslip.component';
     MatchesComponent,
     BetslipComponent
   ],
-  providers: [UserService, ThemeService],
+  providers: [UserService, ThemeService, {
+    provide: HTTP_INTERCEPTORS,
+    useClass: MockInterceptorService,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,70 +1,126 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { Component, ViewChild, OnInit, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
-import { Filters, FootballDataService, Match } from '../FootballDataService';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
+import { MatSort, MatSortModule } from '@angular/material/sort';
+import { FootballDataService } from '../FootballDataService';
 import { ThemeService } from '../ThemeService';
-import { MatRowDef } from '@angular/material/table';
-import { MatSort } from '@angular/material/sort';
-
-
-const numDays = 2;
-const todayString = new Date(new Date().getTime()).toISOString().substring(0, 10).slice(0, 10);
-const nextWeekString = new Date(new Date().getTime() + (numDays * 24 * 60 * 60 * 1000)).toISOString().substring(0, 10).slice(0, 10);
 
 @Component({
   selector: 'app-matches',
   templateUrl: './matches.component.html',
-  styleUrls: ['./matches.component.css']
+  styleUrls: ['./matches.component.css'],
 })
-export class MatchesComponent implements OnInit {
-  themeService: ThemeService;
-  matchesByCompetition = new Map<string, Match[]>();
-  displayedColumns: string[];
-  dataSource = new MatTableDataSource<Match>([]);
-  filters: Filters = {
-    dateFrom: todayString,
-    dateTo: nextWeekString,
-    permission: 'TIER_ONE',
-    competitions: 'PL,SA,FL1,BL1,PD,CL'
-  };
 
-  @ViewChild(MatSort) sort!: MatSort;
-  @ViewChild(MatPaginator) paginator!: MatPaginator;
-
-  constructor(private footballDataService: FootballDataService, private _themeService: ThemeService) {
-    this.themeService = _themeService;
-    this.displayedColumns = ['competition', 'utcDate', 'match'];
-
-  }
+export class MatchesComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
-    //if (localStorage.length == 0) { alert("User not logged, please log in"); return; }
-    // this.footballDataService.getMatches(this.filters).subscribe(data => {
-    //   let allMatches: Match[] = [];
-    //   data.forEach((value: Match[], key: string) => {
-    //     allMatches = allMatches.concat(value);
-    //   });
-    //   this.dataSource = new MatTableDataSource(allMatches);
-    //   this.dataSource.paginator = this.paginator;
-    //   this.dataSource.sort = this.sort;
-    //   this.paginator._intl.itemsPerPageLabel = 'Matches per page:';
-    //   this.paginator._intl.getRangeLabel = this.getRangeLabel;
-    //   this.paginator.pageSize = 10;
-    // });
-    //alert("ngOnInit matches.component");
+    this.getMatches();
   }
 
   ngAfterViewInit(): void {
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
+    setTimeout(() => {
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    })
+  }
+
+  themeService: ThemeService;
+  dataSource: MatTableDataSource<any>;
+  displayedColumns = ['competition', 'utcDate', 'match'];
+
+  @ViewChild(MatSort) sort: MatSort = new MatSort();
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
+  constructor(themeService: ThemeService, private footballDataService: FootballDataService, private cdr: ChangeDetectorRef) {
+    this.dataSource = new MatTableDataSource();
+    this.themeService = themeService;
+  }
+  getMatches() {
+    this.footballDataService.getMatches().subscribe({
+      next: (data: any) => {
+        console.log(data)
+        this.dataSource = new MatTableDataSource(data.matches);
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
+      },
+      error: (err: any) => {
+        console.error('Error fetching matches:', err);
+      }
+    });
   }
   onPageChange(event: PageEvent) {
     this.paginator.pageIndex = event.pageIndex;
     this.paginator.pageSize = event.pageSize;
+    console.log('Page changed:', event);
   }
-  getRangeLabel(page: number, pageSize: number, length: number) {
+
+  getRangeLabel(page: number, pageSize: number, length: number): string {
     const start = page * pageSize + 1;
     const end = (page + 1) * pageSize > length ? length : (page + 1) * pageSize;
     return `${start} - ${end} of ${length}`;
   }
+
+  isDarkTheme(): boolean {
+    return this.themeService.darkModeEnabled;
+  }
+}
+
+export interface Match {
+  area: {
+    id: number;
+    name: string;
+    code: string;
+    flag: string;
+  };
+  competition: {
+    id: number;
+    name: string;
+    code: string;
+    type: string;
+    emblem: string;
+  };
+  season: {
+    id: number;
+    startDate: string;
+    endDate: string;
+    currentMatchday: number;
+    winner: null;
+  };
+  id: number;
+  utcDate: string;
+  status: string;
+  matchday: number;
+  stage: string;
+  group: null;
+  lastUpdated: string;
+  homeTeam: {
+    id: number;
+    name: string;
+    shortName: string;
+    tla: null;
+    crest: string;
+  };
+  awayTeam: {
+    id: number;
+    name: string;
+    shortName: string;
+    tla: string;
+    crest: string;
+  };
+  score: {
+    winner: string;
+    duration: string;
+    fullTime: {
+      home: number;
+      away: number;
+    };
+    halfTime: {
+      home: number;
+      away: number;
+    };
+  };
+  odds: {
+    msg: string;
+  };
+  referees: [];
 }

@@ -1,6 +1,6 @@
 {
     "/api": {
-        "target": "https://api.football-data.org",
+        "target": "http://api.football-data.org",
         "secure": true,
         "changeOrigin": true,
         "pathRewrite": {

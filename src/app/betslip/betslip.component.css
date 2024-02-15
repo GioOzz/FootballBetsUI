@@ -1,0 +1,46 @@
+/* bet slip container */
+.bet-slip {
+  background-color: #f5f5f5;
+  border: 1px solid #ccc;
+  padding: 10px;
+  width: 300px;
+}
+
+/* bet item */
+.bet-item {
+  margin-bottom: 10px;
+}
+
+/* bet item title */
+.bet-item-title {
+  font-weight: bold;
+}
+
+/* bet item details */
+.bet-item-details {
+  font-size: 14px;
+  color: #888;
+}
+
+/* bet item amount */
+.bet-item-amount {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* bet item outcome */
+.bet-item-outcome {
+  font-size: 14px;
+  color: #888;
+}
+
+/* bet item outcome - win */
+.bet-item-outcome-win {
+  color: green;
+}
+
+/* bet item outcome - lose */
+.bet-item-outcome-lose {
+  color: red;
+}

@@ -9,7 +9,6 @@ import { UserService } from '../UserService';
   styleUrls: ['./profile.component.css']
 })
 
-
 export class ProfileComponent implements OnInit {
   constructor(private navbarService: NavbarService, private userService: UserService, themeService: ThemeService) {
     this.navbarService.setActiveItem('profile');
@@ -23,9 +22,6 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.userData = JSON.parse(localStorage.getItem('userdata') || '{}') as UserData;
-    console.log("userData profile.component.ts", this.userData);
-    console.log(this.nowdate);
-    //this.loadPermission(this.userData.permissions, this.userData);
     //possibility of change user psw, user email, edit the wallet with put 
   }
 

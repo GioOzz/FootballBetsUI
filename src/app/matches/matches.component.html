@@ -1,24 +1,21 @@
-<!-- 
-    <th>Date</th>
-    <th>Match</th>
-    <th>1 X 2</th>
-    <th>U/O</th>
-    <th>GG/NG</th>
--->
 <div class="mat-elevation-z8">
-  <mat-table [dataSource]="dataSource" matSort matSortActive="date" matSormat-cellirection="desc" [ngClass]="{'dark-theme': themeService.isDarkTheme()}">
+  <mat-table [dataSource]="dataSource" matSort matSortActive="utcDate" matSortDirection="desc"
+    [ngClass]="{'dark-theme': themeService.isDarkTheme()}">
+    <ng-container matColumnDef="competition">
+      <mat-header-cell *matHeaderCellDef  mat-sort-header>Competition</mat-header-cell>
+      <mat-cell *matCellDef="let match">
+        <img [src]="match.competition.emblem" alt={{match.competition.name}}>
+        {{ match.competition.name }}
+      </mat-cell>
+    </ng-container>
     <ng-container matColumnDef="utcDate">
       <mat-header-cell *matHeaderCellDef mat-sort-header>Date</mat-header-cell>
       <mat-cell *matCellDef="let match">{{ match.utcDate | date:'dd/MM/yyyy HH:mm' }}</mat-cell>
     </ng-container>
-    <ng-container matColumnDef="competition">
-      <mat-header-cell *matHeaderCellDef>Competition</mat-header-cell>
-      <mat-cell *matCellDef="let match">{{ match.competition.name }}</mat-cell>
-    </ng-container>
     <ng-container matColumnDef="match">
       <mat-header-cell *matHeaderCellDef>Match</mat-header-cell>
       <mat-cell *matCellDef="let match">
-        <img [src]="match.homeTeam.crest" alt="{{ match.homeTeam.shortName }} logo">
+        <img src={{match.homeTeam.crest}} alt="{{ match.homeTeam.shortName }} logo">
         <div class="match-description">
           {{ match.homeTeam.shortName }}
           -
@@ -28,8 +25,8 @@
       </mat-cell>
     </ng-container>
 
-    <mat-header-row *matHeaderRowDef="['competition', 'utcDate', 'match']"></mat-header-row>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
-  <mat-paginator [pageSizeOptions]="[10, 20, 30]" showFirstLastButtons (page)="onPageChange($event)"></mat-paginator>
+  <mat-paginator [pageSizeOptions]="[5,  10,  20]" showFirstLastButtons (page)="onPageChange($event)"></mat-paginator>
 </div>

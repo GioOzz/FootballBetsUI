@@ -1,8 +1,7 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { UserData } from './profile/profile.component';
 
 const apiUrl = 'http://localhost:5200/api/User/'
 const httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json; charset=utf-8', 'Access-Control-Allow-Origin': '*' }) };
@@ -17,9 +16,6 @@ export class UserService {
   constructor(private http: HttpClient) { this._http = http; }
 
   login(username: string, password: string) {
-    if (username == "testuser" && password == "testpsw") {
-      location.replace("/profile");
-    }
     return this.http.post(`${apiUrl}login`, {
       "userName": username,
       "password": password

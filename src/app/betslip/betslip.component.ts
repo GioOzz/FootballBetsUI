@@ -1,9 +1,4 @@
 import { Component } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
-import { Match } from '../FootballDataService';
-
-
-
 
 @Component({
   selector: 'app-betslip',
@@ -13,14 +8,9 @@ import { Match } from '../FootballDataService';
 export class BetslipComponent {
   displayedColumns: string[] = ['fixture', 'odds', 'remove'];
   bets: Bet[] = [];
-  
+
   totalStake = this.getTotalStake();
   totalReturn = this.getTotalOdds();
-
-  addBet(id: number,  match: Match, matchdate: Date, betvalue: number, prediction : string,
-    stake: number, odd: number, result = undefined, profit = undefined): void {
-    this.bets.push(new Bet(id, match, matchdate, prediction, betvalue, stake, odd, result, profit));
-  }
 
   removeBet(index: number): void {
     this.bets.splice(index, 1);
@@ -43,7 +33,7 @@ export class BetslipComponent {
 export class Bet {
   constructor(
     public id: number,
-    public match: Match,
+    //public match: Match,
     public matchDate: Date,
     public prediction: string,
     public betValue: number,
@@ -51,13 +41,5 @@ export class Bet {
     public odd: number,
     public result?: string,
     public profit?: number
-  ) { 
-    id = 1;
-    prediction = match.homeTeam.shortName + match.awayTeam.shortName;
-    matchDate = new Date('yyyy/MM/dd HH:mm');
-    betValue = 1.3;
-    odd = this.odd;
-    result = undefined;
-    profit = undefined;
-  }
+  ) { }
 }
