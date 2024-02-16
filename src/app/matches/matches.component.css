@@ -26,3 +26,19 @@ img {
     width: 100%;
     text-align: center;
 }
+
+.mat-header-cell {
+    text-align: center;
+}
+
+@media (max-width: 600px) {
+    .mat-header-cell {
+        text-align: left;
+    }
+}
+
+button.selected {
+    background-color: blue; /* Change to the desired color */
+    color: white; /* Change to the desired text color */
+  }
+  

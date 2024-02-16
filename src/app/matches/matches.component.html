@@ -1,32 +1,79 @@
 <div class="mat-elevation-z8">
-  <mat-table [dataSource]="dataSource" matSort matSortActive="utcDate" matSortDirection="desc"
+  <mat-table [dataSource]="dataSource" matSort matSortActive="utcDate" matSortDirection="asc"
     [ngClass]="{'dark-theme': themeService.isDarkTheme()}">
     <ng-container matColumnDef="competition">
-      <mat-header-cell *matHeaderCellDef  mat-sort-header>Competition</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef fxLayout="row" fxLayoutAlign="center center" mat-sort-header>
+        Competition
+      </mat-header-cell>
       <mat-cell *matCellDef="let match">
-        <img [src]="match.competition.emblem" alt={{match.competition.name}}>
+        <img [src]="match.competition.emblem" alt="{{match.competition.name}}">
         {{ match.competition.name }}
       </mat-cell>
     </ng-container>
     <ng-container matColumnDef="utcDate">
-      <mat-header-cell *matHeaderCellDef mat-sort-header>Date</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef fxLayout="row" fxLayoutAlign="center center" mat-sort-header>
+        Date
+      </mat-header-cell>
       <mat-cell *matCellDef="let match">{{ match.utcDate | date:'dd/MM/yyyy HH:mm' }}</mat-cell>
     </ng-container>
     <ng-container matColumnDef="match">
-      <mat-header-cell *matHeaderCellDef>Match</mat-header-cell>
+      <mat-header-cell *matHeaderCellDef fxLayout="row" fxLayoutAlign="center center">
+        Match
+      </mat-header-cell>
       <mat-cell *matCellDef="let match">
-        <img src={{match.homeTeam.crest}} alt="{{ match.homeTeam.shortName }} logo">
+        <img [src]="match.homeTeam.crest" alt="{{ match.homeTeam.shortName }} logo">
         <div class="match-description">
-          {{ match.homeTeam.shortName }}
-          -
-          {{ match.awayTeam.shortName }}
+          {{ match.homeTeam.shortName }} - {{ match.awayTeam.shortName }}
         </div>
         <img [src]="match.awayTeam.crest" alt="{{ match.awayTeam.shortName }} logo">
       </mat-cell>
     </ng-container>
-
+    <ng-container matColumnDef="1x2">
+      <mat-header-cell *matHeaderCellDef fxLayout="row" fxLayoutAlign="center center">
+        1 X 2
+      </mat-header-cell>
+      <mat-cell *matCellDef="let match; let i = index">
+        <div>
+          <!-- 1X2 options -->
+          <button type="button" (click)="select1X2('1', i)"
+            [ngClass]="{'selected': selectedValues[i]?.['1x2'] === '1'}">1</button>
+          <button type="button" (click)="select1X2('X', i)"
+            [ngClass]="{'selected': selectedValues[i]?.['1x2'] === 'X'}">X</button>
+          <button type="button" (click)="select1X2('2', i)"
+            [ngClass]="{'selected': selectedValues[i]?.['1x2'] === '2'}">2</button>
+        </div>
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="gg/no">
+      <mat-header-cell *matHeaderCellDef fxLayout="row" fxLayoutAlign="center center">
+        GOAL / NO GOAL
+      </mat-header-cell>
+      <mat-cell *matCellDef="let match; let i = index">
+        <div>
+          <!-- Goal/No Goal options -->
+          <button type="button" (click)="selectGoalNoGoal('Goal', i)"
+            [ngClass]="{'selected': selectedValues[i]?.['gg/no'] === 'Goal'}">Goal</button>
+          <button type="button" (click)="selectGoalNoGoal('No Goal', i)"
+            [ngClass]="{'selected': selectedValues[i]?.['gg/no'] === 'No Goal'}">No Goal</button>
+        </div>
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="u/o">
+      <mat-header-cell *matHeaderCellDef fxLayout="row" fxLayoutAlign="center center">
+        Under / Over
+      </mat-header-cell>
+      <mat-cell *matCellDef="let match; let i = index">
+        <div>
+          <!-- Under/Over options -->
+          <select title="underOverSelect" (change)="updateSelectedValue($event, i)">
+            <option *ngFor="let option of underOverOptions" [value]="option"
+              [selected]="selectedValues[i]?.['u/o'] === option">{{ option }}</option>
+          </select>
+        </div>
+      </mat-cell>
+    </ng-container>
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
-  <mat-paginator [pageSizeOptions]="[5,  10,  20]" showFirstLastButtons (page)="onPageChange($event)"></mat-paginator>
+  <mat-paginator [pageSizeOptions]="[10, 20, 30]" showFirstLastButtons (page)="onPageChange($event)"></mat-paginator>
 </div>

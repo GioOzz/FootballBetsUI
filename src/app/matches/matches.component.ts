@@ -1,7 +1,7 @@
 import { Component, ViewChild, OnInit, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
-import { MatSort, MatSortModule } from '@angular/material/sort';
+import { MatSort } from '@angular/material/sort';
 import { FootballDataService } from '../FootballDataService';
 import { ThemeService } from '../ThemeService';
 
@@ -12,6 +12,13 @@ import { ThemeService } from '../ThemeService';
 })
 
 export class MatchesComponent implements OnInit, AfterViewInit {
+  selected1X2: string = '';
+  selectedGoalNoGoal: string = '';
+  selectedUnderOver: string = '';
+  underOverOptions: string[] = ['0.5', '1.5', '2.5', '3.5'];
+  themeService: ThemeService;
+  dataSource: MatTableDataSource<any>;
+  displayedColumns = ['competition', 'utcDate', 'match', '1x2', 'gg/no', 'u/o'];
 
   ngOnInit(): void {
     this.getMatches();
@@ -24,9 +31,6 @@ export class MatchesComponent implements OnInit, AfterViewInit {
     })
   }
 
-  themeService: ThemeService;
-  dataSource: MatTableDataSource<any>;
-  displayedColumns = ['competition', 'utcDate', 'match'];
 
   @ViewChild(MatSort) sort: MatSort = new MatSort();
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -59,6 +63,33 @@ export class MatchesComponent implements OnInit, AfterViewInit {
     const end = (page + 1) * pageSize > length ? length : (page + 1) * pageSize;
     return `${start} - ${end} of ${length}`;
   }
+
+  selectedValues: any[] = [];
+
+  select1X2(value: string, index: number) {
+    this.selectedValues[index] = { ...this.selectedValues[index], '1x2': value };
+  }
+
+  selectGoalNoGoal(value: string, index: number) {
+    this.selectedValues[index] = { ...this.selectedValues[index], 'gg/no': value };
+  }
+
+  selectUnderOver(value: string, index: number) {
+    this.selectedValues[index] = { ...this.selectedValues[index], 'u/o': value };
+  }
+
+  updateSelectedValue(event: any, index: number) : void {
+    const value = event.target.value;
+    if (!this.selectedValues[index]) {
+      this.selectedValues[index] = {};
+    }
+    this.selectedValues[index]['u/o'] = value;
+  }
+
+  isSelectedOption(option: string, index: number): boolean {
+    const selectedValue = this.selectedValues[index]?.['u/o'];
+    return selectedValue === option;
+  } 
 
   isDarkTheme(): boolean {
     return this.themeService.darkModeEnabled;
